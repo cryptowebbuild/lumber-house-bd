@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="bn" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Lumber House Furniture | কাস্টম গেমিং ও এক্সিকিউটিভ ওয়ার্কস্টেশন | মিরপুর-১০, ঢাকা</title>
+  
+  <!-- Meta & SEO -->
+  <meta name="description" content="Lumber House Furniture - মিরপুর-১০ এর প্রিমিয়াম কাস্টমাইজড গেমিং ডেস্ক, এক্সিকিউটিভ ওয়ার্কস্টেশন ও হোম-অফিস টেবিল। ০.৩ সেকেন্ড আল্ট্রা-ফাস্ট ১-ক্লিক অর্ডার।">
+  <meta property="og:title" content="Lumber House Furniture | Custom Designed Desks">
+  <meta property="og:description" content="Built for your lifestyle. কাস্টম সাইজ ও ফিনিশে আপনার স্বপ্নের ওয়ার্কস্পেস তৈরি করুন।">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=1200&q=80">
+
+  <!-- Google Fonts: Space Grotesk + Plus Jakarta Sans + Hind Siliguri -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    if (typeof tailwind !== 'undefined') {
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              industrial: {
+                950: '#0B0F14',
+                900: '#111822',
+                800: '#1B2636',
+                700: '#25354C',
+                600: '#344966',
+                100: '#E7ECEF',
+                50: '#F5F7F8'
+              },
+              timber: {
+                600: '#B87333',
+                500: '#D48C46',
+                400: '#E5A663',
+                100: '#FAF2EA'
+              },
+              accentNeon: {
+                500: '#00E599',
+                400: '#33EBAE'
+              }
+            },
+            fontFamily: {
+              heading: ['"Space Grotesk"', '"Hind Siliguri"', 'sans-serif'],
+              sans: ['"Plus Jakarta Sans"', '"Hind Siliguri"', 'sans-serif']
+            }
+          }
+        }
+      };
+    }
+  </script>
+
+  <!-- React 18 & Babel CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif;
+      background-color: #0B0F14;
+      color: #F5F7F8;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #D48C46;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="selection:bg-timber-500 selection:text-white">
+
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect, useMemo } = React;
+
+const PRODUCTS = [
+  {
+    id: 1,
+    name: 'এপেক্স প্রো হেভি-ডিউটি গেমিং ও এডিটিং ডেস্ক',
+    code: 'LH-GAMER-PRO',
+    category: 'gaming',
+    price: 12500,
+    originalPrice: 15000,
+    tag: 'বেস্ট সেলার • আল্ট্রা স্টেবল',
+    specs: 'হেভি ৩ ইঞ্চি মেটাল ফ্রেম, ক্যাবল ট্রের সাথে হেডফোন ও কাপ হোল্ডার',
+    wood: 'ওয়াটারপ্রুফ হাই-ডেনসিটি টেক্সচার্ড উড টপ',
+    dimensions: '5ft x 2.5ft (কাস্টমাইজযোগ্য)',
+    image: 'https://images.unsplash.com/photo-1598550476439-6847785fcea6?auto=format&fit=crop&w=800&q=80',
+    description: 'মাল্টিপল মনিটর ও হেভি গেমিং পিসি সেটআপের জন্য জিরো-শেক ভাইব্রেশন-ফ্রি স্ট্রাকচার। স্ক্র্যাচ ও লিকুইড রেজিস্ট্যান্ট ফিনিশ।'
+  },
+  {
+    id: 2,
+    name: 'স্ক্যান্ডিনেভিয়ান মিনিমালিস্ট স্টাডি ও ওয়ার্ক ডেস্ক',
+    code: 'LH-NORDIC-OAK',
+    category: 'workstation',
+    price: 9800,
+    originalPrice: 11500,
+    tag: 'ডিজাইনার চয়েস',
+    specs: 'ম্যাট ব্ল্যাক স্টিল লেগস ও ন্যাচারাল উড ফিনিশ',
+    wood: 'আমেরিকান ওক টেক্সচার্ড সিজনড টপ',
+    dimensions: '4.5ft x 2ft x 30"H',
+    image: 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=800&q=80',
+    description: 'ওয়ার্ক ফ্রম হোম এবং প্রোডাক্টিভ স্টাডি স্পেসের জন্য ক্ল্যাটার-ফ্রি আধুনিক মিনিমালিস্ট টেবিল।'
+  },
+  {
+    id: 3,
+    name: 'এক্সিকিউটিভ এল-শেপ কর্নার ওয়ার্কস্টেশন',
+    code: 'LH-EXEC-L',
+    category: 'workstation',
+    price: 22500,
+    originalPrice: 26000,
+    tag: 'ম্যানেজার ও সিইও স্পেশাল',
+    specs: 'ইন্টিগ্রেটেড ড্রয়ার ইউনিট ও হিডেন ক্যাবল ডাক্ট',
+    wood: 'সিজনড মেহগনি ও প্রিমিয়াম ম্যাট লেমিনেশন',
+    dimensions: '6ft x 4ft এল-শেপ কনফিগ',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
+    description: 'একটি ডেস্কেই ল্যাপটপ, প্রিন্টার, ফাইল এবং মনিটর সব অর্গানাইজড রাখার আল্টিমেট এক্সিকিউটিভ সল্যুশন।'
+  },
+  {
+    id: 4,
+    name: 'লাইভ-এজ সলিড উড ডাইনিং ও ডিসপ্লে টেবিল',
+    code: 'LH-LIVE-EDGE',
+    category: 'dining',
+    price: 34000,
+    originalPrice: 39000,
+    tag: '১০০% সলিড র উড',
+    specs: 'প্রাকৃতিক গাছের ঢেউ ও বার্ন ফিনিশ এজেস',
+    wood: 'খাঁটি সিজনড শাল ও মেহগনি স্লাব উইথ পাউডার-কোটেড লেগস',
+    dimensions: '6.5ft x 3ft x 30"H',
+    image: 'https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&w=800&q=80',
+    description: 'প্রতিটি টেবিলের কাঠের শেইপ সম্পূর্ণ অদ্বিতীয়। ক্যাফে, লাক্সারি অ্যাপার্টমেন্ট বা অফিস মিটিং রুমের প্রাণ।'
+  },
+  {
+    id: 5,
+    name: 'স্টাডিপ্রো ডুয়াল শেল্ফ ইন্টিগ্রেটেড ডেস্ক',
+    code: 'LH-STUDY-DUAL',
+    category: 'workstation',
+    price: 7500,
+    originalPrice: 8900,
+    tag: 'বাজেট চ্যাম্পিয়ন',
+    specs: 'বই ও ফাইল সাজানোর জন্য ২-লেয়ার বিল্ট-ইন বুকশেলফ',
+    wood: 'ওয়াটার-রেজিস্ট্যান্ট টেক্সচার্ড বোর্ড ও মেটাল চেসিস',
+    dimensions: '4ft x 2ft',
+    image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80',
+    description: 'ছোট স্পেসে পড়াশোনা বা ফ্রিল্যান্সিং কাজের জন্য সর্বোচ্চ ইউটিলিটি সম্বলিত টেবিল।'
+  },
+  {
+    id: 6,
+    name: 'কম্প্যাক্ট অর্গানিক কফি ও অ্যাকসেন্ট টেবিল',
+    code: 'LH-COFFEE-SLAB',
+    category: 'dining',
+    price: 4200,
+    originalPrice: 5000,
+    tag: 'হ্যান্ডক্রাফটেড',
+    specs: 'থ্রি-লেগ ট্রাইপড ম্যাট ব্ল্যাক মেটাল বেস',
+    wood: 'সলিড উড রাউন্ড কাট উইথ পিউ কোটিং',
+    dimensions: '24" ডায়ামিটার x 18"H',
+    image: 'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=800&q=80',
+    description: 'লিভিং রুম, রিডিং কর্নার বা সোফার পাশে বই ও কফি মগ রাখার স্টাইলিশ অ্যাকসেন্ট পিস।'
+  }
+];
+
+function App() {
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [activeProduct, setActiveProduct] = useState(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  
+  // Customization Options
+  const [deskSize, setDeskSize] = useState('স্ট্যান্ডার্ড সাইজ (5ft x 2.5ft)');
+  const [woodColor, setWoodColor] = useState('ডার্ক ওয়ালনাট (Rustic Walnut)');
+  const [deliveryOption, setDeliveryOption] = useState('dhaka'); // 'dhaka', 'outside', 'pickup'
+
+  // Form State
+  const [customerName, setCustomerName] = useState('');
+  const [customerPhone, setCustomerPhone] = useState('');
+  const [customerAddress, setCustomerAddress] = useState('');
+  const [specialNotes, setSpecialNotes] = useState('');
+
+  // Real-time browsing indicator
+  const [activeGamers, setActiveGamers] = useState(27);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveGamers(prev => Math.floor(Math.random() * 12) + 22);
+    }, 4500);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
+  });
+
+  const filteredProducts = useMemo(() => {
+    if (selectedCategory === 'all') return PRODUCTS;
+    return PRODUCTS.filter(p => p.category === selectedCategory);
+  }, [selectedCategory]);
+
+  const openOrderModal = (product) => {
+    setActiveProduct(product);
+    setIsDrawerOpen(true);
+  };
+
+  const handleWhatsAppOrder = (e) => {
+    e.preventDefault();
+    if (!customerName || !customerPhone) {
+      alert('অনুগ্রহ করে আপনার নাম ও ফোন নম্বর প্রদান করুন');
+      return;
+    }
+
+    const orderId = 'LH-' + Math.floor(100000 + Math.random() * 900000);
+    const deliveryText = 
+      deliveryOption === 'dhaka' ? 'ঢাকার ভিতরে হোম ডেলিভারি (৳৩৫০)' :
+      deliveryOption === 'outside' ? 'ঢাকার বাইরে কুরিয়ার ডেলিভারি (৳৬৫০)' :
+      'মিরপুর শোরুম থেকে সরাসরি পিকআপ (ফ্রি)';
+
+    const message = 
+      `*🪵 Lumber House Furniture - কাস্টম অর্ডার রসিদ #${orderId}*\n` +
+      `------------------------------------------\n` +
+      `*ডেস্ক মডেল:* ${activeProduct.name}\n` +
+      `*কোড:* ${activeProduct.code}\n` +
+      `*নির্বাচিত সাইজ:* ${deskSize}\n` +
+      `*কাঠের ফিনিশ:* ${woodColor}\n` +
+      `*মূল্য:* ৳${activeProduct.price.toLocaleString('en-IN')}\n` +
+      `*ডেলিভারি মেথড:* ${deliveryText}\n\n` +
+      `*গ্রাহকের তথ্য:*\n` +
+      `👤 *নাম:* ${customerName}\n` +
+      `📞 *ফোন:* ${customerPhone}\n` +
+      `📍 *ঠিকানা:* ${customerAddress || 'শোরুমে কথা হবে'}\n` +
+      (specialNotes ? `📝 *নোট/কাস্টম সাইজ:* ${specialNotes}\n` : '') +
+      `------------------------------------------\n` +
+      `*মেসেজ:* আসসালামু আলাইকুম, আমি Lumber House এর ওয়েবসাইট থেকে এই কাস্টম ডেস্কটি কনফার্ম করতে চাই। বুকিং নিশ্চিত করুন।`;
+
+    const waUrl = `https://wa.me/8801405867302?text=${encodeURIComponent(message)}`;
+    window.open(waUrl, '_blank');
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col bg-[#0B0F14] text-stone-100 font-sans">
+      
+      {/* 1. TOP OFFICIAL DEMO BANNER & CRYPTOWEBBUILD BACKLINK */}
+      <div className="bg-[#111822] text-stone-300 text-xs py-2 px-4 border-b border-stone-800">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
+          <div className="flex items-center gap-2">
+            <span className="bg-timber-500 text-stone-950 font-bold px-2 py-0.5 rounded text-[10px] tracking-wider uppercase">
+              কনসেপ্ট ডেমো স্টোর
+            </span>
+            <span className="text-stone-300">
+              Lumber House Furniture (মিরপুর-১০)-এর জন্য ০.৩ সেকেন্ড আল্ট্রা-ফাস্ট ১-ক্লিক অর্ডার ডিজাইন
+            </span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="text-stone-400">লোডিং গতি: <strong className="text-accentNeon-500">০.৩ সেকেন্ড</strong></span>
+            <span className="text-stone-600">|</span>
+            <a 
+              href="https://cryptowebbuild.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-timber-400 hover:text-white font-semibold underline underline-offset-2 transition-colors"
+            >
+              Engineered by CryptoWebBuild ↗
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. MAIN HEADER & MIRPUR SHOWROOM DETAILS */}
+      <header className="sticky top-0 z-40 bg-[#0B0F14]/90 backdrop-blur-md border-b border-stone-800/80">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+          
+          {/* Logo & Store Location */}
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div className="w-12 h-12 bg-gradient-to-br from-timber-500 to-amber-700 text-stone-950 flex items-center justify-center rounded-lg shadow-lg font-heading text-2xl font-bold tracking-tight">
+              LH
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h1 className="font-heading text-xl sm:text-2xl font-bold tracking-tight text-white">
+                  Lumber House <span className="text-timber-400 font-normal">Furniture</span>
+                </h1>
+                <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                  ⭐ ৪.৮ রেটিং • ৮.৩K ফলোয়ার
+                </span>
+              </div>
+              <p className="text-[11px] sm:text-xs text-stone-400 flex items-center gap-1">
+                <i data-lucide="map-pin" className="w-3.5 h-3.5 text-timber-400"></i>
+                বাতেন সড়ক, ফায়ার সার্ভিসের পিছনে, মিরপুর-১০, ঢাকা • 01405-867302
+              </p>
+            </div>
+          </div>
+
+          {/* Quick WhatsApp Action */}
+          <div className="flex items-center gap-3">
+            <div className="hidden sm:flex flex-col text-right">
+              <span className="text-[11px] text-stone-400 font-medium">কাস্টম সাইজ ইনকোয়ারি</span>
+              <a href="tel:01405867302" className="text-sm font-bold text-white hover:text-timber-400 transition-colors">
+                ০১৪০৫-৮৬৭৩০২
+              </a>
+            </div>
+
+            <a 
+              href="https://wa.me/8801405867302" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-lg shadow transition-all"
+            >
+              <i data-lucide="message-circle" className="w-4 h-4"></i>
+              <span>WhatsApp চ্যাট</span>
+            </a>
+          </div>
+
+        </div>
+      </header>
+
+      {/* 3. HERO SHOWCASE: INDUSTRIAL MINIMALIST WORKSPACE */}
+      <section className="relative overflow-hidden py-14 sm:py-20 border-b border-stone-800">
+        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#D48C46_1px,transparent_1px)] [background-size:24px_24px]"></div>
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <div className="lg:col-span-7 space-y-5">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-timber-500/10 text-timber-400 border border-timber-500/20 text-xs">
+                <span className="w-2 h-2 rounded-full bg-accentNeon-500 animate-ping"></span>
+                <span>Designed for your space. Built for your lifestyle.</span>
+              </div>
+
+              <h2 className="font-heading text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white">
+                আপনার স্বপ্নের <span className="text-timber-400">গেমিং ও ওয়ার্কস্পেস</span> টেবিল
+              </h2>
+
+              <p className="text-stone-300 text-xs sm:text-sm max-w-xl leading-relaxed">
+                মিরপুর-১০ এ আমাদের নিজস্ব কারখানায় প্রস্তুত প্রিমিয়াম হেভি-মেটাল ফ্রেম ও সিজনড কাঠের আধুনিক টেবিল। আপনার রুমের মাপ অনুযায়ী যে কোনো সাইজ ও কালার কাস্টমাইজেশনের সুবিধা।
+              </p>
+
+              {/* Badges */}
+              <div className="pt-2 flex flex-wrap items-center gap-4 sm:gap-6 text-xs text-stone-300 border-t border-stone-800">
+                <div className="flex items-center gap-1.5">
+                  <i data-lucide="check-circle" className="w-4 h-4 text-emerald-400"></i>
+                  <span>জিরো ভাইব্রেশন ও হেভি লোড ক্যাপাসিটি</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <i data-lucide="truck" className="w-4 h-4 text-timber-400"></i>
+                  <span>হোম ডেলিভারি ও ফ্রি ফিটিং</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-accentNeon-500 font-medium">
+                  <i data-lucide="flame" className="w-4 h-4"></i>
+                  <span>এখন {activeGamers} জন ব্রাউজ করছেন</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Featured Product Hero Card */}
+            <div className="lg:col-span-5">
+              <div className="relative bg-[#111822] rounded-xl p-4 border border-stone-700/80 shadow-2xl">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-lg mb-3">
+                  <img 
+                    src={PRODUCTS[0].image} 
+                    alt={PRODUCTS[0].name}
+                    className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
+                  />
+                  <span className="absolute top-3 left-3 bg-timber-500 text-stone-950 font-bold text-[10px] px-2.5 py-1 rounded-md uppercase tracking-wider">
+                    হট কালেকশন • 5ft Pro Setup
+                  </span>
+                </div>
+                <div className="space-y-1.5">
+                  <div className="flex justify-between items-baseline">
+                    <h3 className="font-heading text-lg font-bold text-white">
+                      {PRODUCTS[0].name}
+                    </h3>
+                    <span className="text-timber-400 font-bold text-lg">৳১২,৫০০</span>
+                  </div>
+                  <p className="text-xs text-stone-400">
+                    {PRODUCTS[0].specs}
+                  </p>
+                  <button 
+                    onClick={() => openOrderModal(PRODUCTS[0])}
+                    className="w-full mt-2.5 bg-timber-500 hover:bg-timber-600 text-stone-950 font-bold text-xs py-3 rounded-lg shadow-lg transition-all flex items-center justify-center gap-2"
+                  >
+                    <i data-lucide="settings-2" className="w-4 h-4"></i>
+                    <span>১-ক্লিকে কাস্টমাইজ ও WhatsApp বুকিং</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 4. FILTER TABS */}
+      <section className="bg-[#111822] border-b border-stone-800 sticky top-20 z-30 shadow-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+            
+            <button 
+              onClick={() => setSelectedCategory('all')}
+              className={`px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
+                selectedCategory === 'all' 
+                  ? 'bg-timber-500 text-stone-950 shadow font-bold' 
+                  : 'bg-stone-800/80 text-stone-300 hover:bg-stone-800'
+              }`}
+            >
+              সব টেবিল কালেকশন ({PRODUCTS.length})
+            </button>
+
+            <button 
+              onClick={() => setSelectedCategory('gaming')}
+              className={`px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
+                selectedCategory === 'gaming' 
+                  ? 'bg-timber-500 text-stone-950 shadow font-bold' 
+                  : 'bg-stone-800/80 text-stone-300 hover:bg-stone-800'
+              }`}
+            >
+              🎮 গেমিং ও কনটেন্ট ক্রিয়েটর ডেস্ক
+            </button>
+
+            <button 
+              onClick={() => setSelectedCategory('workstation')}
+              className={`px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
+                selectedCategory === 'workstation' 
+                  ? 'bg-timber-500 text-stone-950 shadow font-bold' 
+                  : 'bg-stone-800/80 text-stone-300 hover:bg-stone-800'
+              }`}
+            >
+              💼 এক্সিকিউটিভ ও স্টাডি টেবিল
+            </button>
+
+            <button 
+              onClick={() => setSelectedCategory('dining')}
+              className={`px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
+                selectedCategory === 'dining' 
+                  ? 'bg-timber-500 text-stone-950 shadow font-bold' 
+                  : 'bg-stone-800/80 text-stone-300 hover:bg-stone-800'
+              }`}
+            >
+              🏠 ডাইনিং ও কফি টেবিল
+            </button>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 5. MAIN PRODUCT CATALOG */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-1">
+        
+        <div className="text-center max-w-2xl mx-auto mb-8 space-y-1.5">
+          <span className="text-xs uppercase tracking-widest text-timber-400 font-bold">
+            MIRPUR-10 WORKSHOP DIRECT SHOWCASE
+          </span>
+          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-white">
+            মজবুত কাঠ ও প্রিমিয়াম মেটালের নিখুঁত ব্যালেন্স
+          </h2>
+          <p className="text-stone-400 text-xs sm:text-sm">
+            ফ্যাক্টরি ডিরেক্ট প্রাইসে যেকোনো কাস্টম সাইজের অর্ডার নেওয়া হয়
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {filteredProducts.map(product => (
+            <div 
+              key={product.id}
+              className="bg-[#111822] rounded-xl border border-stone-800 hover:border-timber-500/80 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col group overflow-hidden"
+            >
+              {/* Product Image */}
+              <div className="relative aspect-[4/3] bg-stone-900 overflow-hidden">
+                <img 
+                  src={product.image} 
+                  alt={product.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <span className="absolute top-3 left-3 bg-stone-950/90 text-timber-400 text-[10px] font-bold px-2.5 py-1 rounded-md border border-stone-800">
+                  {product.tag}
+                </span>
+                <span className="absolute bottom-3 right-3 bg-stone-900/90 text-stone-300 text-[10px] font-medium px-2 py-0.5 rounded">
+                  {product.code}
+                </span>
+              </div>
+
+              {/* Product Body */}
+              <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
+                <div>
+                  <h3 className="font-heading text-lg font-bold text-white group-hover:text-timber-400 transition-colors">
+                    {product.name}
+                  </h3>
+
+                  <div className="mt-2 space-y-1 text-xs text-stone-300 bg-stone-900/70 p-2.5 rounded-lg border border-stone-800">
+                    <p><strong>ফিচার:</strong> {product.specs}</p>
+                    <p><strong>উপাদান:</strong> {product.wood}</p>
+                    <p><strong>ডিফল্ট সাইজ:</strong> {product.dimensions}</p>
+                  </div>
+
+                  <p className="mt-2.5 text-xs text-stone-400 line-clamp-2">
+                    {product.description}
+                  </p>
+                </div>
+
+                {/* Price & Action */}
+                <div className="pt-3 border-t border-stone-800 flex items-center justify-between">
+                  <div>
+                    <span className="text-xs text-stone-500 line-through mr-1.5">
+                      ৳{product.originalPrice.toLocaleString('en-IN')}
+                    </span>
+                    <span className="text-xl font-bold text-white">
+                      ৳{product.price.toLocaleString('en-IN')}
+                    </span>
+                  </div>
+
+                  <button 
+                    onClick={() => openOrderModal(product)}
+                    className="inline-flex items-center gap-1.5 bg-timber-500 hover:bg-timber-600 text-stone-950 font-bold text-xs px-3.5 py-2.5 rounded-lg shadow transition-all"
+                  >
+                    <i data-lucide="shopping-bag" className="w-3.5 h-3.5"></i>
+                    <span>১-ক্লিকে অর্ডার</span>
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </main>
+
+      {/* 6. INSTANT 1-CLICK ORDER & CUSTOMIZER DRAWER */}
+      {isDrawerOpen && activeProduct && (
+        <div className="fixed inset-0 z-50 overflow-hidden">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity"
+            onClick={() => setIsDrawerOpen(false)}
+          ></div>
+
+          <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <div className="w-screen max-w-md bg-[#111822] text-stone-100 shadow-2xl flex flex-col border-l border-stone-800">
+              
+              {/* Drawer Header */}
+              <div className="p-4 bg-stone-950 text-white flex items-center justify-between border-b border-stone-800">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-timber-500 text-stone-950 flex items-center justify-center font-bold">
+                    <i data-lucide="check" className="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <h3 className="font-heading text-base font-bold">১-ক্লিক কাস্টমাইজেশন ও অর্ডার</h3>
+                    <p className="text-[10px] text-timber-400">Lumber House Furniture • মিরপুর-১০ শোকেস</p>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => setIsDrawerOpen(false)}
+                  className="p-1 rounded text-stone-400 hover:text-white transition-colors"
+                >
+                  <i data-lucide="x" className="w-6 h-6"></i>
+                </button>
+              </div>
+
+              {/* Drawer Body */}
+              <div className="p-5 overflow-y-auto custom-scrollbar flex-1 space-y-4">
+                
+                {/* Product Summary */}
+                <div className="bg-stone-900 p-3.5 rounded-lg border border-stone-800 flex gap-3.5">
+                  <img 
+                    src={activeProduct.image} 
+                    alt={activeProduct.name}
+                    className="w-16 h-16 object-cover rounded-lg border border-stone-700"
+                  />
+                  <div className="flex-1">
+                    <h4 className="font-heading font-bold text-sm leading-snug">
+                      {activeProduct.name}
+                    </h4>
+                    <p className="text-[11px] text-stone-400">{activeProduct.code}</p>
+                    <p className="text-sm font-bold text-timber-400 mt-1">
+                      ৳{activeProduct.price.toLocaleString('en-IN')}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Size Selector */}
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-stone-300">ডেস্ক সাইজ নির্বাচন করুন:</label>
+                  <select 
+                    value={deskSize}
+                    onChange={e => setDeskSize(e.target.value)}
+                    className="w-full text-xs p-2.5 rounded-lg border border-stone-700 bg-stone-900 text-white focus:outline-none focus:border-timber-500"
+                  >
+                    <option value="স্ট্যান্ডার্ড সাইজ (5ft x 2.5ft)">স্ট্যান্ডার্ড সাইজ (5ft x 2.5ft) - ডিফল্ট</option>
+                    <option value="কমপ্যাক্ট সাইজ (4ft x 2ft)">কমপ্যাক্ট সাইজ (4ft x 2ft)</option>
+                    <option value="লার্জ মাস্টার সাইজ (6ft x 3ft)">লার্জ মাস্টার সাইজ (6ft x 3ft)</option>
+                    <option value="আমার রুমের নির্দিষ্ট কাস্টম মাপ">আমার নিজস্ব কাস্টম মাপে তৈরি চাই</option>
+                  </select>
+                </div>
+
+                {/* Wood Color Option */}
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-stone-300">কাঠের কালার ফিনিশ:</label>
+                  <select 
+                    value={woodColor}
+                    onChange={e => setWoodColor(e.target.value)}
+                    className="w-full text-xs p-2.5 rounded-lg border border-stone-700 bg-stone-900 text-white focus:outline-none focus:border-timber-500"
+                  >
+                    <option value="ডার্ক ওয়ালনাট (Rustic Walnut)">ডার্ক ওয়ালনাট (Rustic Walnut)</option>
+                    <option value="ন্যাচারাল ওক (Natural Oak)">ন্যাচারাল ওক (Natural Oak)</option>
+                    <option value="ম্যাট ব্ল্যাক টিম্বার (Matte Black)">ম্যাট ব্ল্যাক টিম্বার (Matte Black)</option>
+                    <option value="বার্মাটিক সেগুন পলিশ (Teak Finish)">বার্মাটিক সেগুন পলিশ (Teak Finish)</option>
+                  </select>
+                </div>
+
+                {/* Delivery Option */}
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-stone-300">ডেলিভারি মেথড:</label>
+                  <div className="grid grid-cols-3 gap-1.5 text-[11px]">
+                    <button
+                      type="button"
+                      onClick={() => setDeliveryOption('dhaka')}
+                      className={`p-2 rounded-lg border text-center transition-all ${
+                        deliveryOption === 'dhaka' 
+                          ? 'border-timber-500 bg-timber-500/20 text-timber-300 font-bold' 
+                          : 'border-stone-800 bg-stone-900 text-stone-400'
+                      }`}
+                    >
+                      ঢাকা (৳৩৫০)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setDeliveryOption('outside')}
+                      className={`p-2 rounded-lg border text-center transition-all ${
+                        deliveryOption === 'outside' 
+                          ? 'border-timber-500 bg-timber-500/20 text-timber-300 font-bold' 
+                          : 'border-stone-800 bg-stone-900 text-stone-400'
+                      }`}
+                    >
+                      ঢাকার বাইরে (৳৬৫০)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setDeliveryOption('pickup')}
+                      className={`p-2 rounded-lg border text-center transition-all ${
+                        deliveryOption === 'pickup' 
+                          ? 'border-timber-500 bg-timber-500/20 text-timber-300 font-bold' 
+                          : 'border-stone-800 bg-stone-900 text-stone-400'
+                      }`}
+                    >
+                      মিরপুর পিকআপ (ফ্রি)
+                    </button>
+                  </div>
+                </div>
+
+                {/* Form Fields */}
+                <form onSubmit={handleWhatsAppOrder} className="space-y-3">
+                  <div>
+                    <label className="block text-xs font-semibold text-stone-300 mb-1">
+                      আপনার নাম <span className="text-red-400">*</span>
+                    </label>
+                    <input 
+                      type="text"
+                      required
+                      placeholder="উদা: আসিফ মাহমুদ"
+                      value={customerName}
+                      onChange={e => setCustomerName(e.target.value)}
+                      className="w-full text-xs p-2.5 rounded-lg border border-stone-700 bg-stone-900 text-white focus:outline-none focus:border-timber-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-stone-300 mb-1">
+                      মোবাইল নম্বর (WhatsApp) <span className="text-red-400">*</span>
+                    </label>
+                    <input 
+                      type="tel"
+                      required
+                      placeholder="01XXXXXXXXX"
+                      value={customerPhone}
+                      onChange={e => setCustomerPhone(e.target.value)}
+                      className="w-full text-xs p-2.5 rounded-lg border border-stone-700 bg-stone-900 text-white focus:outline-none focus:border-timber-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-stone-300 mb-1">
+                      ডেলিভারি ঠিকানা
+                    </label>
+                    <input 
+                      type="text"
+                      placeholder="রোড, সেক্টর/এলাকা, মিরপুর/উত্তরা/ধানমন্ডি"
+                      value={customerAddress}
+                      onChange={e => setCustomerAddress(e.target.value)}
+                      className="w-full text-xs p-2.5 rounded-lg border border-stone-700 bg-stone-900 text-white focus:outline-none focus:border-timber-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-stone-300 mb-1">
+                      কাস্টম মাপ বা বিশেষ নির্দেশনা (ঐচ্ছিক)
+                    </label>
+                    <textarea 
+                      rows="2"
+                      placeholder="উদা: মনিটর মাউন্টের জন্য পিছনে একটু কাটআউট লাগবে..."
+                      value={specialNotes}
+                      onChange={e => setSpecialNotes(e.target.value)}
+                      className="w-full text-xs p-2.5 rounded-lg border border-stone-700 bg-stone-900 text-white focus:outline-none focus:border-timber-500"
+                    ></textarea>
+                  </div>
+
+                  {/* Submission */}
+                  <button 
+                    type="submit"
+                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm py-3.5 px-4 rounded-lg shadow-lg transition-all flex items-center justify-center gap-2"
+                  >
+                    <i data-lucide="message-circle" className="w-5 h-5"></i>
+                    <span>সরাসরি WhatsApp-এ কাস্টম অর্ডার কনফার্ম করুন</span>
+                  </button>
+
+                  <p className="text-[11px] text-stone-400 text-center">
+                    🔒 সরাসরি Lumber House Furniture এর অফিসিয়াল WhatsApp (01405-867302)-এ রসিদ পৌঁছাবে।
+                  </p>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 7. FOOTER WITH CRYPTOWEBBUILD BACKLINK */}
+      <footer className="bg-stone-950 text-stone-400 text-xs border-t border-stone-800 py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            
+            <div className="space-y-2">
+              <div className="font-heading text-xl font-bold text-white">
+                Lumber House <span className="text-timber-400">Furniture</span>
+              </div>
+              <p className="text-stone-400 text-xs leading-relaxed">
+                মিরপুর-১০ এ অবস্থিত কাস্টমাইজড গেমিং ও এক্সিকিউটিভ ফার্নিচার মেকার। ৮,৩০০+ সন্তুষ্ট গ্রাহকের বিশ্বস্ত প্রতিষ্ঠান।
+              </p>
+            </div>
+
+            <div className="space-y-1.5">
+              <h4 className="text-white font-bold uppercase tracking-wider text-[11px]">ওয়ার্কশপ ও শোরুম</h4>
+              <p className="text-stone-400 text-xs">
+                বাতেন সড়ক, ফায়ার সার্ভিসের পিছনে<br/>
+                মিরপুর-১০, ঢাকা, বাংলাদেশ।
+              </p>
+            </div>
+
+            <div className="space-y-1.5">
+              <h4 className="text-white font-bold uppercase tracking-wider text-[11px]">অফিশিয়াল কন্টাক্ট</h4>
+              <p className="text-stone-400 text-xs">
+                WhatsApp: <strong>01405-867302</strong><br/>
+                গুগল রেটিং: ৪.৮ / ৫.০ ⭐
+              </p>
+            </div>
+
+            <div className="space-y-1.5">
+              <h4 className="text-white font-bold uppercase tracking-wider text-[11px]">সাইট স্পিড</h4>
+              <p className="text-stone-400 text-xs">
+                কোনো ভারী প্লাগইন ছাড়া ০.৩ সেকেন্ড আল্ট্রা-লাইটওয়েট কাস্টম কনফিগারেশন ইঞ্জিন।
+              </p>
+            </div>
+
+          </div>
+
+          <div className="pt-6 border-t border-stone-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <p className="text-stone-500">
+              © {new Date().getFullYear()} Lumber House Furniture. কনসেপ্ট ডেমো স্টোর।
+            </p>
+            <div className="flex items-center gap-2">
+              <span className="text-stone-500">ডিজাইন ও ডেভেলপমেন্ট:</span>
+              <a 
+                href="https://cryptowebbuild.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-timber-400 hover:text-white font-semibold underline underline-offset-4 transition-colors"
+              >
+                CryptoWebBuild (High-Converting DTC Systems)
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </footer>
+
+      {/* Floating Instant WhatsApp Button */}
+      <a 
+        href="https://wa.me/8801405867302"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-40 bg-emerald-600 hover:bg-emerald-700 text-white p-3.5 rounded-full shadow-2xl flex items-center gap-2 transition-transform hover:scale-110"
+        title="WhatsApp-এ সরাসরি কথা বলুন"
+      >
+        <i data-lucide="message-circle" className="w-6 h-6"></i>
+        <span className="max-w-0 overflow-hidden whitespace-nowrap hover:max-w-xs transition-all duration-300 text-xs font-bold pl-0 hover:pl-2">
+          সরাসরি চ্যাট
+        </span>
+      </a>
+
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+
+</body>
+</html>
